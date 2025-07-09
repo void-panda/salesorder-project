@@ -6,26 +6,52 @@ if (isset($_POST['submit'])) {
     $lastName = $_POST['lastName'];
     $email = $_POST['email'];
     $jobTitle = $_POST['jobTitle'];
+
     if ($employeeNumber && $firstName && $email) {
-        $query = "INSERT INTO employees (employeeNumber, firstName, lastName, email, jobTitle) VALUES ('$employeeNumber', '$firstName', '$lastName', '$email', '$jobTitle')";
+        $query = "INSERT INTO employees (employeeNumber, firstName, lastName, email, jobTitle)
+                  VALUES ('$employeeNumber', '$firstName', '$lastName', '$email', '$jobTitle')";
         mysqli_query($conn, $query);
         header("Location: list_employees.php");
     } else {
-        echo "Field wajib tidak boleh kosong!";
+        echo "<div class='alert alert-danger'>Field wajib tidak boleh kosong!</div>";
     }
 }
 ?>
-<!DOCTYPE html><html><head>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<title>Tambah Employee</title></head><body>
-<h2>Tambah Employee</h2>
-<form method="POST">
-Employee Number: <input type="text" name="employeeNumber" required><br>
-First Name: <input type="text" name="firstName" required><br>
-Last Name: <input type="text" name="lastName"><br>
-Email: <input type="email" name="email" required><br>
-Job Title: <input type="text" name="jobTitle"><br>
-<button type="submit" name="submit">Simpan</button>
-</form></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Employee</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <h2 class="mb-4">Tambah Employee</h2>
+    <form method="POST" class="bg-white p-4 rounded shadow-sm">
+        <div class="mb-3">
+            <label for="employeeNumber" class="form-label">Employee Number</label>
+            <input type="text" name="employeeNumber" id="employeeNumber" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" name="firstName" id="firstName" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" name="lastName" id="lastName" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" name="email" id="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="jobTitle" class="form-label">Job Title</label>
+            <input type="text" name="jobTitle" id="jobTitle" class="form-control">
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
+        <a href="list_employees.php" class="btn btn-secondary">Batal</a>
+    </form>
+</div>
+</body>
+</html>
